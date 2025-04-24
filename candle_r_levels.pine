@@ -3,9 +3,12 @@ indicator("R-Levels", overlay=true)
 
 // Input bar index (simulating "click" on a candle)
 targetBarIndex = input.int(0, "Select Bar Index", minval=0)
-showPrices = input.bool(true, "Show Prices on Labels")  // Toggle option
+showPrices = input.bool(true, "Show Prices on Labels")  // Toggle price labels
+showBarIndexLabel = input.bool(true, "Show Bar Index Label")  // Toggle bar index label
 
-label.new(bar_index, high, text=str.tostring(bar_index), style=label.style_label_down, size=size.small)
+// Show bar index label only if toggled on
+if showBarIndexLabel
+    label.new(bar_index, high, text=str.tostring(bar_index), style=label.style_label_down, size=size.small)
 
 var line entryLine = na
 var line stopLine = na
@@ -18,7 +21,7 @@ if (bar_index == targetBarIndex)
     entry = high + 0.01
     stop = low - 0.01
     tradeRisk = entry - stop
-    r3 = entry + (tradeRisk * 3)
+    r3 = entry + tradeRisk * 3
     r6 = entry + tradeRisk * 6
 
     // Update existing lines or create them if not already created
