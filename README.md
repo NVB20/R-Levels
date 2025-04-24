@@ -20,7 +20,7 @@ This is a great tool for **manual backtesting**, **risk-reward visualization**, 
 
 ## 📷 Preview
 
-_(Add a screenshot here of the chart showing the lines and labels)_
+![Alt text](images/TTWO.png)
 
 ---
 
