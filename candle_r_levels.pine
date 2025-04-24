@@ -1,8 +1,10 @@
 //@version=6
-indicator("Candle R-Levels", overlay=true)
+indicator("R-Levels", overlay=true)
 
 // Input bar index (simulating "click" on a candle)
 targetBarIndex = input.int(0, "Select Bar Index", minval=0)
+showPrices = input.bool(true, "Show Prices on Labels")  // Toggle option
+
 label.new(bar_index, high, text=str.tostring(bar_index), style=label.style_label_down, size=size.small)
 
 var line entryLine = na
@@ -33,8 +35,14 @@ if (bar_index == targetBarIndex)
     r3Line := line.new(x1=bar_index, y1=r3, x2=bar_index + 5, y2=r3, color=color.blue, width=2)
     r6Line := line.new(x1=bar_index, y1=r6, x2=bar_index + 5, y2=r6, color=color.purple, width=2)
 
-    // Labels for reference
-    label.new(x=bar_index + 5, y=entry, text="Entry", style=label.style_label_left, color=color.green, textcolor=color.white)
-    label.new(x=bar_index + 5, y=stop, text="Stop", style=label.style_label_left, color=color.red, textcolor=color.white)
-    label.new(x=bar_index + 5, y=r3, text="3R", style=label.style_label_left, color=color.blue, textcolor=color.white)
-    label.new(x=bar_index + 5, y=r6, text="6R", style=label.style_label_left, color=color.purple, textcolor=color.white)
+    // Text formatting based on toggle
+    entryText = showPrices ? "Entry: " + str.tostring(entry, format.mintick) : "Entry"
+    stopText  = showPrices ? "Stop: " + str.tostring(stop, format.mintick) : "Stop"
+    r3Text    = showPrices ? "3R: " + str.tostring(r3, format.mintick) : "3R"
+    r6Text    = showPrices ? "6R: " + str.tostring(r6, format.mintick) : "6R"
+
+    // Labels with conditional price display
+    label.new(x=bar_index + 5, y=entry, text=entryText, style=label.style_label_left, color=color.green, textcolor=color.white)
+    label.new(x=bar_index + 5, y=stop, text=stopText, style=label.style_label_left, color=color.red, textcolor=color.white)
+    label.new(x=bar_index + 5, y=r3, text=r3Text, style=label.style_label_left, color=color.blue, textcolor=color.white)
+    label.new(x=bar_index + 5, y=r6, text=r6Text, style=label.style_label_left, color=color.purple, textcolor=color.white)
