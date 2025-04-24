@@ -1,0 +1,29 @@
+# Ignore macOS system files
+.DS_Store
+
+# Ignore Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Node/npm leftovers (in case you ever automate things)
+node_modules/
+npm-debug.log*
+
+# VS Code settings (optional, useful for consistency)
+.vscode/
+
+# Ignore screenshots or temporary files
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Ignore backup files
+*.bak
+*.tmp
+*~
+
+# Compiled files (if you generate docs or other outputs)
+dist/
+build/
