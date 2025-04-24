@@ -14,7 +14,6 @@ npm-debug.log*
 .vscode/
 
 # Ignore screenshots or temporary files
-*.png
 *.jpg
 *.jpeg
 *.gif
