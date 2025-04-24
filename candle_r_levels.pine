@@ -1,0 +1,40 @@
+//@version=6
+indicator("Candle R-Levels", overlay=true)
+
+// Input bar index (simulating "click" on a candle)
+targetBarIndex = input.int(0, "Select Bar Index", minval=0)
+label.new(bar_index, high, text=str.tostring(bar_index), style=label.style_label_down, size=size.small)
+
+var line entryLine = na
+var line stopLine = na
+var line r3Line = na
+var line r6Line = na
+
+// Clear previous drawings when selecting a new bar
+if (bar_index == targetBarIndex)
+    // Candle levels
+    hi = high
+    lo = low
+    entry = hi + 0.01
+    stop = lo - 0.01
+    tradeRange = hi - lo
+    r3 = entry + tradeRange * 3
+    r6 = entry + tradeRange * 6
+
+    // Delete old lines
+    line.delete(entryLine)
+    line.delete(stopLine)
+    line.delete(r3Line)
+    line.delete(r6Line)
+
+    // Draw new lines
+    entryLine := line.new(x1=bar_index, y1=entry, x2=bar_index + 5, y2=entry, color=color.green, width=2)
+    stopLine := line.new(x1=bar_index, y1=stop, x2=bar_index + 5, y2=stop, color=color.red, width=2)
+    r3Line := line.new(x1=bar_index, y1=r3, x2=bar_index + 5, y2=r3, color=color.blue, width=2)
+    r6Line := line.new(x1=bar_index, y1=r6, x2=bar_index + 5, y2=r6, color=color.purple, width=2)
+
+    // Labels for reference
+    label.new(x=bar_index + 5, y=entry, text="Entry", style=label.style_label_left, color=color.green, textcolor=color.white)
+    label.new(x=bar_index + 5, y=stop, text="Stop", style=label.style_label_left, color=color.red, textcolor=color.white)
+    label.new(x=bar_index + 5, y=r3, text="3R", style=label.style_label_left, color=color.blue, textcolor=color.white)
+    label.new(x=bar_index + 5, y=r6, text="6R", style=label.style_label_left, color=color.purple, textcolor=color.white)
