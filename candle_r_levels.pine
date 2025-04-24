@@ -15,13 +15,11 @@ var line r6Line = na
 // Candle levels when selecting a new bar
 if (bar_index == targetBarIndex)
     // Candle values
-    hi = high
-    lo = low
-    entry = hi + 0.01
-    stop = lo - 0.01
-    tradeRange = hi - lo
-    r3 = entry + tradeRange * 3
-    r6 = entry + tradeRange * 6
+    entry = high + 0.01
+    stop = low - 0.01
+    tradeRisk = entry - stop
+    r3 = entry + (tradeRisk * 3)
+    r6 = entry + tradeRisk * 6
 
     // Update existing lines or create them if not already created
     if (na(entryLine))
