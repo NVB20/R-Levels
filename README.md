@@ -18,8 +18,17 @@ This is a great tool for **manual backtesting**, **risk-reward visualization**, 
 
 ---
 
-## 📷 Preview
-
+## 📷 Quick Start
+* Load the script onto your chart.
+* Identify the bar index where you want to enter the trade.
+![Alt text](images/load-script.png)
+Open the indicator settings by clicking the gear icon on the indicator name.
+![Alt text](images/setting.png)
+* In the settings popup:
+  - (Optional) Disable the "Show Bar Index Label" for a cleaner chart view.
+  - Enter your chosen value into the "Select Bar Index" input field.
+  - Click OK to apply the settings and view the calculated R-level.
+![Alt text](images/index-chose.png)
 ![Alt text](images/TTWO.png)
 
 ---
