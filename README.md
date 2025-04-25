@@ -48,7 +48,3 @@ This is a great tool for **risk-reward visualization**, and **strategy refinemen
 
 ---
 
-## 🛠 Development
-
-### File Structure
-
