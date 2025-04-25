@@ -29,6 +29,9 @@ Open the indicator settings by clicking the gear icon on the indicator name.
   - Enter your chosen value into the "Select Bar Index" input field.
   - Click OK to apply the settings and view the calculated R-level.
 ![Alt text](images/index-chose.png)
+* The indicator now will show your:
+  - Entry level, Stop loss
+  - 3R and 6R targets
 ![Alt text](images/TTWO.png)
 
 ---
