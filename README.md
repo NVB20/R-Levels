@@ -2,7 +2,7 @@
 
 **R-Levels** is a Pine Script project designed for TradingView that allows traders to visually plan trades based on any candle of their choice. By selecting a specific candle using its `bar_index`, the script automatically draws the following levels on the chart:
 
-This is a great tool for **manual backtesting**, **risk-reward visualization**, and **strategy refinement**.
+This is a great tool for **risk-reward visualization**, and **strategy refinement**.
 
 ---
 
@@ -23,7 +23,7 @@ This is a great tool for **manual backtesting**, **risk-reward visualization**, 
 * Identify the bar index where you want to enter the trade.
 ![Alt text](images/load-script.png)
 Open the indicator settings by clicking the gear icon on the indicator name.
-![Alt text](images/setting.png)
+![Alt text](images/settings.png)
 * In the settings popup:
   - (Optional) Disable the "Show Bar Index Label" for a cleaner chart view.
   - Enter your chosen value into the "Select Bar Index" input field.
