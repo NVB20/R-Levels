@@ -22,7 +22,7 @@ This is a great tool for **risk-reward visualization**, and **strategy refinemen
 * Load the script onto your chart.
 * Identify the bar index where you want to enter the trade.
 ![Alt text](images/load-script.png)
-*Open the indicator settings by clicking the gear icon on the indicator name.
+* Open the indicator settings by clicking the gear icon on the indicator name.
 ![Alt text](images/settings.png)
 * In the settings popup:
   - (Optional) Disable the "Show Bar Index Label" for a cleaner chart view.
