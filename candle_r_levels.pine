@@ -1,5 +1,5 @@
 //@version=6
-indicator("R-Levels", overlay=true)
+indicator("R-Levels", overlay=true, max_labels_count = 5)
 
 // Input bar index (simulating "click" on a candle)
 targetBarIndex = input.int(0, "Select Bar Index", minval=0)
