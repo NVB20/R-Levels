@@ -1,6 +1,6 @@
 # R-Levels 🔫📈
 
-**R-Levels** is a Pine Script project designed for TradingView that allows traders to visually plan trades based on any candle of their choice. By selecting a specific candle using its `bar_index`, the script automatically draws the following levels on the chart:
+**R-Levels** is a Pine Script project designed for TradingView that allows traders to visually plan trades based on any candle of their choice. By selecting a specific candle using its `bar_index`
 
 This is a great tool for **risk-reward visualization**, and **strategy refinement**.
 
