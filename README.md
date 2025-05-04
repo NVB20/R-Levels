@@ -30,6 +30,7 @@ This is a great tool for **risk-reward visualization**, and **strategy refinemen
   - Enter your selected value into the “Select Bar Index” input field.
   - (Optional) Disable “Show Bar Index Label” for a cleaner chart view.
   - (Optional) Enable “Use Custom High/Low” and manually enter your desired high and low values.
+    -  You can enter only one value (High or Low) to override—whichever you leave at 0 will stay as it is from the selected candle at the Bar Index.
 
 Click OK to apply the settings and view the calculated R-levels.
 
