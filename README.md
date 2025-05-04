@@ -31,6 +31,8 @@ This is a great tool for **risk-reward visualization**, and **strategy refinemen
   - (Optional) Disable “Show Bar Index Label” for a cleaner chart view.
   - (Optional) Enable “Use Custom High/Low” and manually enter your desired high and low values.
     -  You can enter only one value (High or Low) to override—whichever you leave at 0 will stay as it is from the selected candle at the Bar Index.
+  - (Optional) Enable “Reverse Trade (Short)” to switch to a short setup.
+    - This flips entry/stop and calculates R-levels downward from the entry.
 
 Click OK to apply the settings and view the calculated R-levels.
 
@@ -42,6 +44,9 @@ Click OK to apply the settings and view the calculated R-levels.
   
 ![Alt text](images/TTWO.png)
 
+* 🔄 Reverse Trade (Short Mode)
+  - R-levels are calculated downward from entry.
+ 
 ![Alt text](images/short.png)
 
 
@@ -65,4 +70,3 @@ Click OK to apply the settings and view the calculated R-levels.
     - This lets you receive a notification when price hits your target!
 
 ---
-
