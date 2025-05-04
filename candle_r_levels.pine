@@ -10,6 +10,7 @@ show6R = input.bool(true, "Show 6R Level")
 useCustomLevels = input.bool(false, "Use Custom High/Low")
 customHigh = input.float(0.0, "Custom High", step=0.01)
 customLow = input.float(0.0, "Custom Low", step=0.01)
+isShort = input.bool(false, "Reverse Trade (Short)")
 
 // Optional Bar Index Label
 if showBarIndexLabel
@@ -26,11 +27,19 @@ var float r6 = na
 if bar_index == targetBarIndex
     savedHigh := useCustomLevels and customHigh != 0.0 ? customHigh : high
     savedLow := useCustomLevels and customLow != 0.0 ? customLow : low
-    entry := savedHigh + 0.01
-    stop := savedLow - 0.01
-    float tradeRisk = entry - stop
-    r3 := entry + tradeRisk * 3
-    r6 := entry + tradeRisk * 6
+
+    if not isShort
+        entry := savedHigh + 0.01
+        stop := savedLow - 0.01
+        float tradeRisk = entry - stop
+        r3 := entry + tradeRisk * 3
+        r6 := entry + tradeRisk * 6
+    else
+        entry := savedLow - 0.01
+        stop := savedHigh + 0.01
+        float tradeRisk = stop - entry
+        r3 := entry - tradeRisk * 3
+        r6 := entry - tradeRisk * 6
 
 // Draw lines when values are known
 if not na(entry)
