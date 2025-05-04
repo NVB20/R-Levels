@@ -1,79 +1,57 @@
 //@version=6
-indicator("R-Levels", overlay=true, max_labels_count = 10)
+indicator("R-Levels", overlay=true)
 
-// Input bar index (simulating "click" on a candle)
+// Inputs
 targetBarIndex = input.int(0, "Select Bar Index", minval=0)
-showPrices = input.bool(true, "Show Prices on Labels")  // Toggle price labels
-showBarIndexLabel = input.bool(true, "Show Bar Index Label")  // Toggle bar index label
-show3R = input.bool(true, "Show 3R Level")  // Toggle 3R level
-show6R = input.bool(true, "Show 6R Level")  // Toggle 6R level
+showPrices = input.bool(true, "Show Prices on Labels")
+showBarIndexLabel = input.bool(true, "Show Bar Index Label")
+show3R = input.bool(true, "Show 3R Level")
+show6R = input.bool(true, "Show 6R Level")
+useCustomLevels = input.bool(false, "Use Custom High/Low")
+customHigh = input.float(0.0, "Custom High", step=0.01)
+customLow = input.float(0.0, "Custom Low", step=0.01)
 
-// Show bar index label only if toggled on
+// Optional Bar Index Label
 if showBarIndexLabel
     label.new(bar_index, high, text=str.tostring(bar_index), style=label.style_label_down, size=size.small)
 
-var line entryLine = na
-var line stopLine = na
-var line r3Line = na
-var line r6Line = na
+// Store values at selected bar only once
+var float savedHigh = na
+var float savedLow = na
+var float entry = na
+var float stop = na
+var float r3 = na
+var float r6 = na
 
-// Candle levels when selecting a new bar
-if (bar_index == targetBarIndex)
-    // Candle values
-    entry = high + 0.01
-    stop = low - 0.01
-    tradeRisk = entry - stop
-    r3 = entry + tradeRisk * 3
-    r6 = entry + tradeRisk * 6
+if bar_index == targetBarIndex
+    savedHigh := useCustomLevels and customHigh != 0.0 ? customHigh : high
+    savedLow := useCustomLevels and customLow != 0.0 ? customLow : low
+    entry := savedHigh + 0.01
+    stop := savedLow - 0.01
+    float tradeRisk = entry - stop
+    r3 := entry + tradeRisk * 3
+    r6 := entry + tradeRisk * 6
 
-    // Update or create entry line
-    if na(entryLine)
-        entryLine := line.new(x1=bar_index, y1=entry, x2=bar_index + 5, y2=entry, color=color.green, width=2)
-    else
-        line.set_xy1(entryLine, bar_index, entry)
-        line.set_xy2(entryLine, bar_index + 5, entry)
+// Draw lines when values are known
+if not na(entry)
+    line.new(x1=targetBarIndex, y1=entry, x2=targetBarIndex + 5, y2=entry, color=color.green, width=2)
+    line.new(x1=targetBarIndex, y1=stop, x2=targetBarIndex + 5, y2=stop, color=color.red, width=2)
 
-    // Update or create stop line
-    if na(stopLine)
-        stopLine := line.new(x1=bar_index, y1=stop, x2=bar_index + 5, y2=stop, color=color.red, width=2)
-    else
-        line.set_xy1(stopLine, bar_index, stop)
-        line.set_xy2(stopLine, bar_index + 5, stop)
-
-    // Conditionally update or create 3R line
     if show3R
-        if na(r3Line)
-            r3Line := line.new(x1=bar_index, y1=r3, x2=bar_index + 5, y2=r3, color=color.blue, width=2)
-        else
-            line.set_xy1(r3Line, bar_index, r3)
-            line.set_xy2(r3Line, bar_index + 5, r3)
-    else
-        if not na(r3Line)
-            line.delete(r3Line)
-            r3Line := na
-
-    // Conditionally update or create 6R line
+        line.new(x1=targetBarIndex, y1=r3, x2=targetBarIndex + 5, y2=r3, color=color.blue, width=2)
     if show6R
-        if na(r6Line)
-            r6Line := line.new(x1=bar_index, y1=r6, x2=bar_index + 5, y2=r6, color=color.purple, width=2)
-        else
-            line.set_xy1(r6Line, bar_index, r6)
-            line.set_xy2(r6Line, bar_index + 5, r6)
-    else
-        if not na(r6Line)
-            line.delete(r6Line)
-            r6Line := na
+        line.new(x1=targetBarIndex, y1=r6, x2=targetBarIndex + 5, y2=r6, color=color.purple, width=2)
 
-    // Text formatting based on toggle
+    // Labels
     entryText = showPrices ? "Entry: " + str.tostring(entry, format.mintick) : "Entry"
     stopText  = showPrices ? "Stop: " + str.tostring(stop, format.mintick) : "Stop"
     r3Text    = showPrices ? "3R: " + str.tostring(r3, format.mintick) : "3R"
     r6Text    = showPrices ? "6R: " + str.tostring(r6, format.mintick) : "6R"
 
-    // Labels
-    label.new(x=bar_index + 5, y=entry, text=entryText, style=label.style_label_left, color=color.green, textcolor=color.white)
-    label.new(x=bar_index + 5, y=stop, text=stopText, style=label.style_label_left, color=color.red, textcolor=color.white)
+    label.new(x=targetBarIndex + 5, y=entry, text=entryText, style=label.style_label_left, color=color.green, textcolor=color.white)
+    label.new(x=targetBarIndex + 5, y=stop, text=stopText, style=label.style_label_left, color=color.red, textcolor=color.white)
+    
     if show3R
-        label.new(x=bar_index + 5, y=r3, text=r3Text, style=label.style_label_left, color=color.blue, textcolor=color.white)
+        label.new(x=targetBarIndex + 5, y=r3, text=r3Text, style=label.style_label_left, color=color.blue, textcolor=color.white)
     if show6R
-        label.new(x=bar_index + 5, y=r6, text=r6Text, style=label.style_label_left, color=color.purple, textcolor=color.white)
+        label.new(x=targetBarIndex + 5, y=r6, text=r6Text, style=label.style_label_left, color=color.purple, textcolor=color.white)
