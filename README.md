@@ -34,13 +34,16 @@ This is a great tool for **risk-reward visualization**, and **strategy refinemen
 
 Click OK to apply the settings and view the calculated R-levels.
 
-![Alt text](images/new-custom-high-low.png)
+![Alt text](images/settings-values.png)
 
 * The indicator now will show your:
   - Entry level, Stop loss
   - 3R and 6R targets
   
 ![Alt text](images/TTWO.png)
+
+![Alt text](images/short.png)
+
 
 ---
 
