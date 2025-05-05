@@ -1,5 +1,5 @@
 //@version=6
-indicator("R-Levels", overlay=true)
+indicator("R-Levels", overlay=true, max_labels_count = 12)
 
 // Inputs
 targetBarIndex = input.int(0, "Select Bar Index", minval=0)
@@ -24,22 +24,19 @@ var float stop = na
 var float r3 = na
 var float r6 = na
 
-if bar_index == targetBarIndex
-    savedHigh := useCustomLevels and customHigh != 0.0 ? customHigh : high
-    savedLow := useCustomLevels and customLow != 0.0 ? customLow : low
-
-    if not isShort
-        entry := savedHigh + 0.01
-        stop := savedLow - 0.01
-        float tradeRisk = entry - stop
-        r3 := entry + tradeRisk * 3
-        r6 := entry + tradeRisk * 6
-    else
-        entry := savedLow - 0.01
-        stop := savedHigh + 0.01
-        float tradeRisk = stop - entry
-        r3 := entry - tradeRisk * 3
-        r6 := entry - tradeRisk * 6
+// Long/Short complex
+if not isShort
+    entry := savedHigh + 0.01
+    stop := savedLow - 0.01
+    float tradeRisk = entry - stop
+    r3 := entry + tradeRisk * 3
+    r6 := entry + tradeRisk * 6
+else
+    entry := savedLow - 0.01
+    stop := savedHigh + 0.01
+    float tradeRisk = stop - entry
+    r3 := entry - tradeRisk * 3
+    r6 := entry - tradeRisk * 6
 
 // Draw lines when values are known
 if not na(entry)
