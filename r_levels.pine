@@ -1,0 +1,70 @@
+//@version=6
+indicator("R-Levels", overlay=true, max_labels_count = 12)
+
+// Inputs
+targetBarIndex = input.int(0, "Select Bar Index", minval=0)
+showPrices = input.bool(true, "Show Prices on Labels")
+showBarIndexLabel = input.bool(true, "Show Bar Index Label")
+show3R = input.bool(true, "Show 3R Level")
+show6R = input.bool(true, "Show 6R Level")
+useCustomLevels = input.bool(false, "Use Custom High/Low")
+customHigh = input.float(0.0, "Custom High", step=0.01)
+customLow = input.float(0.0, "Custom Low", step=0.01)
+isShort = input.bool(false, "Reverse Trade (Short)")
+
+// Optional Bar Index Label
+if showBarIndexLabel
+    label.new(bar_index, high, text=str.tostring(bar_index), style=label.style_label_down, size=size.small)
+
+// Store values at selected bar only once
+var float savedHigh = na
+var float savedLow = na
+var float entry = na
+var float stop = na
+var float r3 = na
+var float r6 = na
+
+// Long/Short complex
+if not isShort
+    entry := savedHigh + 0.01
+    stop := savedLow - 0.01
+    float tradeRisk = entry - stop
+    r3 := entry + tradeRisk * 3
+    r6 := entry + tradeRisk * 6
+else
+    entry := savedLow - 0.01
+    stop := savedHigh + 0.01
+    float tradeRisk = stop - entry
+    r3 := entry - tradeRisk * 3
+    r6 := entry - tradeRisk * 6
+
+// Draw lines when values are known
+if not na(entry)
+    // Entry and Stop lines
+    line.new(x1=targetBarIndex, y1=entry, x2=targetBarIndex + 5, y2=entry, color=color.green, width=2)
+    line.new(x1=targetBarIndex, y1=stop, x2=targetBarIndex + 5, y2=stop, color=color.red, width=2)
+
+    // R-level lines
+    if show3R
+        line.new(x1=targetBarIndex, y1=r3, x2=targetBarIndex + 5, y2=r3, color=color.blue, width=2)
+    if show6R
+        line.new(x1=targetBarIndex, y1=r6, x2=targetBarIndex + 5, y2=r6, color=color.purple, width=2)
+
+    // Optional Custom High/Low Lines
+    if useCustomLevels and customHigh != 0.0
+        line.new(x1=targetBarIndex, y1=customHigh, x2=targetBarIndex + 5, y2=customHigh, color=color.gray, style=line.style_dashed)
+    if useCustomLevels and customLow != 0.0
+        line.new(x1=targetBarIndex, y1=customLow, x2=targetBarIndex + 5, y2=customLow, color=color.gray, style=line.style_dashed)
+
+    // Labels
+    entryText = showPrices ? "Entry: " + str.tostring(entry, format.mintick) : "Entry"
+    stopText  = showPrices ? "Stop: " + str.tostring(stop, format.mintick) : "Stop"
+    r3Text    = showPrices ? "3R: " + str.tostring(r3, format.mintick) : "3R"
+    r6Text    = showPrices ? "6R: " + str.tostring(r6, format.mintick) : "6R"
+
+    label.new(x=targetBarIndex + 5, y=entry, text=entryText, style=label.style_label_left, color=color.green, textcolor=color.white)
+    label.new(x=targetBarIndex + 5, y=stop, text=stopText, style=label.style_label_left, color=color.red, textcolor=color.white)
+    if show3R
+        label.new(x=targetBarIndex + 5, y=r3, text=r3Text, style=label.style_label_left, color=color.blue, textcolor=color.white)
+    if show6R
+        label.new(x=targetBarIndex + 5, y=r6, text=r6Text, style=label.style_label_left, color=color.purple, textcolor=color.white)
