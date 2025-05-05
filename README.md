@@ -1,8 +1,8 @@
 # R-Levels 🔫📈
+**R-Levels** is a precision-built TradingView indicator for traders who want to quickly visualize and act on risk-to-reward levels directly on their TradingView charts. 
+This Pine Script indicator calculates and displays the 3R and 6R targets based on a selected bar or custom-defined risk (either for Long or Short trade).
 
-**R-Levels** is a Pine Script project designed for TradingView that allows traders to visually plan trades based on any candle of their choice. By selecting a specific candle using its `bar_index` .
-
-This is a great tool for **risk-reward visualization**, and **strategy refinement**.
+**R-Levels** enhances your chart with clear, visualized profit targets — making it an essential addition for both **risk management** and **strategy optimization**.
 
 ---
 
@@ -13,12 +13,15 @@ This is a great tool for **risk-reward visualization**, and **strategy refinemen
   - ✅ Entry level
   - 🛑 Stop loss level
   - 🎯 3R and 6R target lines
-- Labels each line for clarity
-- Fully customizable via script input
+-   Fully customizable via inputs
+-   Support for Long and Short Trades:
+    -  Toggle between long or short mode to match your trade direction
 
 ---
 
-## 📷 Quick Start
+## 📸 Example
+Here’s what the R-Levels indicator looks like in action:
+
 * Load the script onto your chart.
 * Identify the bar index where you want to enter the trade.
 ![Alt text](images/load-script.png)
@@ -68,5 +71,18 @@ Click OK to apply the settings and view the calculated R-levels.
     - Choose "Add Alert on Horizontal Line" or "Create Alert".
     - Customize your alert (e.g. crossing, once per bar close, etc.)
     - This lets you receive a notification when price hits your target!
+
+---
+
+## 📌 Use Cases
+
+- Scalping or intraday setups with precise risk metrics
+- Swing traders looking for target alignment
+
+---
+
+## 🤝 Contributing
+
+Suggestions, bug reports, and contributions are welcome! Feel free to fork the repo, create an issue, or submit a pull request.
 
 ---
