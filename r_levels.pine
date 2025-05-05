@@ -1,5 +1,5 @@
 //@version=6
-indicator("R-Levels", overlay=true, max_labels_count = 12)
+indicator("R-Levels", overlay=true, max_labels_count = 500)
 
 // Inputs
 targetBarIndex = input.int(0, "Select Bar Index", minval=0)
@@ -12,9 +12,14 @@ customHigh = input.float(0.0, "Custom High", step=0.01)
 customLow = input.float(0.0, "Custom Low", step=0.01)
 isShort = input.bool(false, "Reverse Trade (Short)")
 
-// Optional Bar Index Label
-if showBarIndexLabel
-    label.new(bar_index, high, text=str.tostring(bar_index), style=label.style_label_down, size=size.small)
+// Calculate and show last 12 bar index labels
+if showBarIndexLabel and barstate.islast
+    for i = 0 to 11
+        // Get the bar index for each of the last 12 bars
+        int labelBarIndex = bar_index - i
+        // Create a label at each bar position
+        label.new(labelBarIndex, high[i], text=str.tostring(labelBarIndex), 
+                 style=label.style_label_down, size=size.small)
 
 // Store values at selected bar only once
 var float savedHigh = na
@@ -24,19 +29,26 @@ var float stop = na
 var float r3 = na
 var float r6 = na
 
-// Long/Short complex
-if not isShort
-    entry := savedHigh + 0.01
-    stop := savedLow - 0.01
-    float tradeRisk = entry - stop
-    r3 := entry + tradeRisk * 3
-    r6 := entry + tradeRisk * 6
-else
-    entry := savedLow - 0.01
-    stop := savedHigh + 0.01
-    float tradeRisk = stop - entry
-    r3 := entry - tradeRisk * 3
-    r6 := entry - tradeRisk * 6
+// Save high/low only once when targetBarIndex is reached
+if na(savedHigh) and bar_index == targetBarIndex and targetBarIndex > 0
+    savedHigh := useCustomLevels and customHigh != 0.0 ? customHigh : high
+    savedLow := useCustomLevels and customLow != 0.0 ? customLow : low
+
+// Calculate levels only once after saved values are set
+if not na(savedHigh) and not na(savedLow) and na(entry)
+    if not isShort
+        entry := savedHigh + 0.01
+        stop := savedLow - 0.01
+        float tradeRisk = entry - stop
+        r3 := entry + tradeRisk * 3
+        r6 := entry + tradeRisk * 6
+    else
+        entry := savedLow - 0.01
+        stop := savedHigh + 0.01
+        float tradeRisk = stop - entry
+        r3 := entry - tradeRisk * 3
+        r6 := entry - tradeRisk * 6
+        
 
 // Draw lines when values are known
 if not na(entry)
@@ -64,6 +76,7 @@ if not na(entry)
 
     label.new(x=targetBarIndex + 5, y=entry, text=entryText, style=label.style_label_left, color=color.green, textcolor=color.white)
     label.new(x=targetBarIndex + 5, y=stop, text=stopText, style=label.style_label_left, color=color.red, textcolor=color.white)
+    
     if show3R
         label.new(x=targetBarIndex + 5, y=r3, text=r3Text, style=label.style_label_left, color=color.blue, textcolor=color.white)
     if show6R
