@@ -1,5 +1,5 @@
 //@version=6
-indicator("R-Levels", overlay=true, max_labels_count = 50)
+indicator("R-Levels", overlay=true, max_labels_count = 12)
 
 // Inputs
 targetBarIndex = input.int(0, "Select Bar Index", minval=0)
