@@ -58,9 +58,9 @@ if not na(entry)
 
     // R-level lines
     if show3R
-        line.new(x1=targetBarIndex, y1=r3, x2=targetBarIndex + 5, y2=r3, color=color.blue, width=2)
+        line.new(x1=targetBarIndex, y1=r3, x2=targetBarIndex + 20, y2=r3, color=color.blue, width=2)
     if show6R
-        line.new(x1=targetBarIndex, y1=r6, x2=targetBarIndex + 5, y2=r6, color=color.purple, width=2)
+        line.new(x1=targetBarIndex, y1=r6, x2=targetBarIndex + 20, y2=r6, color=color.purple, width=2)
 
     // Optional Custom High/Low Lines
     if useCustomLevels and customHigh != 0.0
@@ -71,13 +71,13 @@ if not na(entry)
     // Labels
     entryText = showPrices ? "Entry: " + str.tostring(entry, format.mintick) : "Entry"
     stopText  = showPrices ? "Stop: " + str.tostring(stop, format.mintick) : "Stop"
-    r3Text    = showPrices ? "3R: " + str.tostring(r3, format.mintick) : "3R"
-    r6Text    = showPrices ? "6R: " + str.tostring(r6, format.mintick) : "6R"
+    r3Text    = showPrices ? "3R\n " + str.tostring(r3, format.mintick) : "3R"
+    r6Text    = showPrices ? "6R\n " + str.tostring(r6, format.mintick) : "6R"
 
     label.new(x=targetBarIndex + 5, y=entry, text=entryText, style=label.style_label_left, color=color.green, textcolor=color.white)
     label.new(x=targetBarIndex + 5, y=stop, text=stopText, style=label.style_label_left, color=color.red, textcolor=color.white)
     
     if show3R
-        label.new(x=targetBarIndex + 5, y=r3, text=r3Text, style=label.style_label_left, color=color.blue, textcolor=color.white)
+        label.new(x=targetBarIndex + 2, y=r3, text=r3Text, style=label.style_label_right, color=color.blue, textcolor=color.white)
     if show6R
-        label.new(x=targetBarIndex + 5, y=r6, text=r6Text, style=label.style_label_left, color=color.purple, textcolor=color.white)
+        label.new(x=targetBarIndex + 2, y=r6, text=r6Text, style=label.style_label_right, color=color.purple, textcolor=color.white)
