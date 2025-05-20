@@ -45,12 +45,12 @@ Click OK to apply the settings and view the calculated R-levels.
   - Entry level, Stop loss
   - 3R and 6R targets
   
-![Alt text](images/TTWO.png)
+![Alt text](images/NVDA-Long-design-update.png)
 
 * 🔄 Reverse Trade (Short Mode)
   - R-levels are calculated downward from entry.
  
-![Alt text](images/short.png)
+![Alt text](images/NVDA-Short-design-update.png)
 
 
 ---
