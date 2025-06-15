@@ -11,7 +11,7 @@ useCustomLevels = input.bool(false, "Use Custom High/Low")
 customHigh = input.float(0.0, "Custom High", step=0.01)
 customLow = input.float(0.0, "Custom Low", step=0.01)
 isShort = input.bool(false, "Reverse Trade (Short)")
-showRiskLabel = input.bool(true, "Show Risk Label",tooltip="Use this risk value Risk Capital / Risk to calculate how many shares to buy.")
+showRiskLabel = input.bool(true, "Show Risk Label",tooltip="Use this risk value Risk Capital / Risk to calculate how many shares to Trade.")
 
 
 // Show bar index labels for last 12 bars
