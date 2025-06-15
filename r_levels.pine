@@ -75,8 +75,13 @@ if not na(entry) and not na(targetBarTime) and na(entryLine)
 
     // Risk Label
     if showRiskLabel
-        label.new(x=targetBarTime,y=low - 1, text="Risk: " + str.tostring(entry - stop, format.mintick), style=label.style_label_up, color=color.orange, textcolor=color.white, xloc=xloc.bar_time)
-        line.new(x1=targetBarTime, y1=low, x2=targetBarTime, y2=low - 1, color=color.orange, width=2, xloc=xloc.bar_time)
+        float labelY = isShort ? high + 1 : low - 1
+        float lineY1 = isShort ? high : low
+        float lineY2 = isShort ? high + 1 : low - 1
+
+        label.new(x=targetBarTime, y=labelY, text="Risk: " + str.tostring(math.abs(entry - stop), format.mintick), style= isShort ? label.style_label_down : label.style_label_up, color=color.orange, textcolor=color.white, xloc=xloc.bar_time)
+        line.new(x1=targetBarTime, y1=lineY1, x2=targetBarTime, y2=lineY2, color=color.orange, width=2, xloc=xloc.bar_time)
+
 
      // 3R
     if show3R
