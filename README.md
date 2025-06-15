@@ -86,3 +86,11 @@ Click OK to apply the settings and view the calculated R-levels.
 Suggestions, bug reports, and contributions are welcome! Feel free to fork the repo, create an issue, or submit a pull request.
 
 ---
+
+## Latest Updates:
+
+* Enhanced Visibility: Improved length of the 3R and 6R lines for better clarity during trading sessions.
+* High Bar Count Support: Optimized performance to handle charts with a large number of bars — especially useful for low timeframes and stocks with extended historical data.
+
+
+---
