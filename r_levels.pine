@@ -73,12 +73,12 @@ if not na(entry) and not na(targetBarTime) and na(entryLine)
 
      // 3R
     if show3R
-        line.new(x1=targetBarTime, y1=r3, x2=targetBarTime + 15 * offset, y2=r3, color=color.blue, width=2, xloc=xloc.bar_time)
+        line.new(x1=targetBarTime, y1=r3, x2=targetBarTime + 20 * offset, y2=r3, color=color.blue, width=2, xloc=xloc.bar_time)
         label.new(x=targetBarTime, y=r3, text=showPrices ? "3R\n" + str.tostring(r3, format.mintick) : "3R", style=label.style_label_right, color=color.blue, textcolor=color.white, xloc=xloc.bar_time)
 
     // 6R 
     if show6R
-        line.new(x1=targetBarTime, y1=r6, x2=targetBarTime + 15 * offset, y2=r6, color=color.purple, width=2, xloc=xloc.bar_time)
+        line.new(x1=targetBarTime, y1=r6, x2=targetBarTime + 20 * offset, y2=r6, color=color.purple, width=2, xloc=xloc.bar_time)
         label.new(x=targetBarTime, y=r6, text=showPrices ? "6R\n" + str.tostring(r6, format.mintick) : "6R", style=label.style_label_right, color=color.purple, textcolor=color.white, xloc=xloc.bar_time)
 
     // Optional custom high/low
