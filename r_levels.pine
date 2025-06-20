@@ -11,8 +11,6 @@ useCustomLevels = input.bool(false, "Use Custom High/Low")
 customHigh = input.float(0.0, "Custom High", step=0.01)
 customLow = input.float(0.0, "Custom Low", step=0.01)
 isShort = input.bool(false, "Reverse Trade (Short)")
-showRiskLabel = input.bool(true, "Show Risk Label",tooltip="Use this risk value Risk Capital / Risk to calculate how many shares to Trade.")
-
 
 // Show bar index labels for last 12 bars
 if showBarIndexLabel and barstate.islast
@@ -72,16 +70,6 @@ if not na(entry) and not na(targetBarTime) and na(entryLine)
     // Stop
     stopLine := line.new(x1=targetBarTime, y1=stop, x2=targetBarTime + 5 * offset, y2=stop, color=color.red, width=2, xloc=xloc.bar_time)
     stopLabel := label.new(x=targetBarTime + 5 * offset, y=stop, text=showPrices ? "Stop: " + str.tostring(stop, format.mintick) : "Stop", style=label.style_label_left, color=color.red, textcolor=color.white, xloc=xloc.bar_time)
-
-    // Risk Label
-    if showRiskLabel
-        float labelY = isShort ? high + 1 : low - 1
-        float lineY1 = isShort ? high : low
-        float lineY2 = isShort ? high + 1 : low - 1
-
-        label.new(x=targetBarTime, y=labelY, text="Risk: " + str.tostring(math.abs(entry - stop), format.mintick), style= isShort ? label.style_label_down : label.style_label_up, color=color.orange, textcolor=color.white, xloc=xloc.bar_time)
-        line.new(x1=targetBarTime, y1=lineY1, x2=targetBarTime, y2=lineY2, color=color.orange, width=2, xloc=xloc.bar_time)
-
 
      // 3R
     if show3R
