@@ -13,7 +13,6 @@ This Pine Script indicator calculates and displays the 3R and 6R targets based o
   - ✅ Entry level
   - 🛑 Stop loss level
   - 🎯 3R and 6R target lines
-  -  📏 Optional Risk Calculation
 -   Fully customizable via inputs
 -   Support for Long and Short Trades:
     -  Toggle between long or short mode to match your trade direction
@@ -67,7 +66,6 @@ Click OK to apply the settings and view the calculated R-levels.
     - ✅ Entry
     - 🛑 Stop Loss
     - 🎯 3R and 6R target levels
-    - 📏 Optional Risk Calculation
 7. 🔔 You can also create TradingView alerts on the 3R and 6R lines:
     - Right-click on the 3R or 6R line drawn by the script.
     - Choose "Add Alert on Horizontal Line" or "Create Alert".
